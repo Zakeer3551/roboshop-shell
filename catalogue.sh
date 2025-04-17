@@ -8,7 +8,7 @@ Y="\e[33m"
 N="\e[0m"
 
 
-TIMESTAMP=$(date +%F:%r)
+TIMESTAMP=$(date +%F-%H-%M-%S)
 LOG_FILE="/tmp/$0-$TIMESTAMP.log"
 
 VALIDATE (){
