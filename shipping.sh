@@ -84,7 +84,7 @@ dnf install mysql -y &>> $LOGFILE
 
 VALIDATE $? "install MySQL client"
 
-mysql -h mysql.daws76s.fun -uroot -pRoboShop@1 < /app/db/master-data.sql 
+mysql -h mysql.daws76s.fun -uroot -pRoboShop@1 < /app/db/master-data.sql &>> $LOGFILE
 
 VALIDATE $? "loading shipping data"
 
