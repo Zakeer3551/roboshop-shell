@@ -54,45 +54,33 @@ mkdir -p /app &>> $LOG_FILE
 
 VALIDATE $? " Creating app directory "
 
-curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOG_FILE
+curl -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip &>> $LOG_FILE
 
-VALIDATE $? " Downloading catalogue application "
+VALIDATE $? " Downloading user application "
 
 cd /app  &>> $LOG_FILE
 
-unzip -o /tmp/catalogue.zip &>> $LOG_FILE
+unzip -o /tmp/cart.zip &>> $LOG_FILE
 
-VALIDATE $? " Unzipping catalogue application "
+VALIDATE $? " Unzipping cart application "
 
 npm install  &>> $LOG_FILE
 
 VALIDATE $? " Installing Dependencies "
 
-# use absolute, because catalogue.service exists there
-cp /home/centos/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>> $LOG_FILE
+# use absolute, because cart.service exists there
+cp /home/centos/roboshop-shell/cart.service /etc/systemd/system/cart.service &>> $LOG_FILE
 
-VALIDATE $? " copying catalogue service file "
+VALIDATE $? " copying cart service file "
 
 systemctl daemon-reload &>> $LOG_FILE
 
-VALIDATE $? " catalogue daemon reload "
+VALIDATE $? " cart daemon reload "
 
-systemctl enable catalogue &>> $LOG_FILE
+systemctl enable cart &>> $LOG_FILE
 
-VALIDATE $? " enabling catalogue "
+VALIDATE $? " Enabling cart "
 
-systemctl start catalogue &>> $LOG_FILE
+systemctl start cart &>> $LOG_FILE
 
-VALIDATE $? " Starting Catalogue "
-
-cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOG_FILE
-
-VALIDATE $? " Coping the mongo.repo "
-
-dnf install mongodb-org-shell -y &>> $LOG_FILE
-
-VALIDATE $? " Installing Mongodb "
-
-mongo --host mongodb.daws76s.fun </app/schema/catalogue.js &>> $LOG_FILE
-
-VALIDATE $? " Connecting mongodb "
+VALIDATE $? " Starting cart "
