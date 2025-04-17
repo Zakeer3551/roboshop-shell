@@ -28,11 +28,6 @@ then
     echo -e "$G You are root user $N"
 fi # fi means reverse of if, indicating condition end
 
-
-cp /home/centos/mysql.repo /etc/yum.repos.d/mysql.repo &>> $LOG_FILE
-
-VALIDATE $? " Copied MySQl repo "
-
 systemctl enable mysqld &>> $LOG_FILE
 
 VALIDATE $? " Enabling MYSQL server "
